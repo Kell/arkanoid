@@ -36,7 +36,7 @@ public class Arkanoid extends ApplicationAdapter {
 		wallLeft = new Wall(0, 0, 10, 600);
 		wallRight = new Wall(790, 0, 10, 600);
 
-		paddle = new Paddle(rectX, rectY,rectWidth, rectHeight);
+		paddle = new Paddle((400 - (rectWidth / 2)), rectY,rectWidth, rectHeight);
 		paddle.setMaxX(Gdx.graphics.getWidth());
 		float ballX = (paddle.getX() + (paddle.getWidth() / 2)) - (10);
 		float ballY = rectY + rectHeight;
@@ -103,7 +103,7 @@ public class Arkanoid extends ApplicationAdapter {
 		} else if(Gdx.input.isKeyPressed(Input.Keys.SPACE)) {
 			//releasing ball
 			ball.velocityX = ball.velocity;
-			ball.velocityY = ball.velocityX;
+			ball.velocityY = ball.velocity;
 
 			ball.active = true;
 		}
