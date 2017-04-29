@@ -11,7 +11,6 @@ import com.badlogic.gdx.graphics.GL20;
 public class Arkanoid extends ApplicationAdapter {
 
 	public static boolean gameOver = false;
-	int rectX = 10;
 	int rectY = 10;
 	int rectWidth = 100;
 	int rectHeight = 20;
