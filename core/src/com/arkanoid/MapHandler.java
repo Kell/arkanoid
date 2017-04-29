@@ -14,6 +14,7 @@ public class MapHandler {
 
     // number of max possible bricks in a row
     public int maxBricksPerRow = 13;
+    public int numberOfBrickRows = 6;
     // holds all bricks for current map
     public List<Brick> bricks = new ArrayList<Brick>();
 
@@ -21,11 +22,6 @@ public class MapHandler {
     Wall wallTop;
     Wall wallLeft;
     Wall wallRight;
-
-    // bricks
-    Brick brick1;
-    Brick brick2;
-    Brick brick3;
 
     /**
      * Handles everything that is needed on start up of the map
@@ -37,15 +33,26 @@ public class MapHandler {
         wallLeft = new Wall(0, 0, 10, 600);
         wallRight = new Wall(790, 0, 10, 600);
 
-
         // generating bricks
+        //temporary color array
+        Color[] colors = {Color.RED, Color.DARK_GRAY, Color.FOREST, Color.CORAL};
+        int currentColorIndex = 0;
+        int rowY = 400;
         // TODO: refactor brick generation for map
-        brick1 = new Brick(10, 300, Color.BLUE);
-        brick2 = new Brick(70, 300, Color.GREEN);
-        brick3 = new Brick(130, 300, Color.CYAN);
-        bricks.add(brick1);
-        bricks.add(brick2);
-        bricks.add(brick3);
+        // temporary solution to generate bricks
+        for (int i = 1; i <= numberOfBrickRows; i++) {
+            int rowX = 10;
+            rowY += 20;
+            for (int j = 1; j <= maxBricksPerRow; j++) {
+                bricks.add(new Brick(rowX, rowY, colors[currentColorIndex]));
+                rowX += 60;
+                currentColorIndex++;
+                //start again with colors
+                if(currentColorIndex == colors.length) {
+                    currentColorIndex = 0;
+                }
+            }
+        }
     }
 
     /**
@@ -58,7 +65,6 @@ public class MapHandler {
        wallRight.render();
 
        drawBricks();
-
     }
 
     /**
@@ -66,7 +72,7 @@ public class MapHandler {
      */
     public void update()
     {
-
+        //TODO:: add brick collision
     }
 
     /**
