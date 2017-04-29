@@ -27,10 +27,12 @@ public class Paddle {
 
 
     public void setX(float x) {
-        if (x < 0) {
-            x = 0;
-        } else if (x > maxX) {
-            x = maxX;
+        //check if paddle reach the edge of the left wall with the width of 10
+        if (x <= 10) {
+            x = 10;
+        } else if ((x + width ) >= maxX) {
+            //substruct the with from max x position because we compare left lower edge of the paddle
+            x = maxX - width;
         }
 
         this.x = x;
