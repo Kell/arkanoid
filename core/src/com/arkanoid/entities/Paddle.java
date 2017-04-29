@@ -8,11 +8,12 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
  */
 public class Paddle {
     public float velocity = 150;
-    float x;
-    float y;
-    int width;
-    int height;
-    int maxX;
+    public float x;
+    public float rightLowerCorner;
+    public float y;
+    public int width;
+    public int height;
+    public int maxX;
 
     ShapeRenderer rectRenderer = null;
 
@@ -30,12 +31,13 @@ public class Paddle {
         //check if paddle reach the edge of the left wall with the width of 10
         if (x <= 10) {
             x = 10;
-        } else if ((x + width ) >= maxX) {
-            //substruct the with from max x position because we compare left lower edge of the paddle
+        } else if (rightLowerCorner >= maxX) {
+            //substruct the width from max x position because we set the position of the left lower corner
             x = maxX - width;
         }
 
         this.x = x;
+        rightLowerCorner = x + width;
     }
 
     public void setY(float y) {

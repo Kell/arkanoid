@@ -1,18 +1,14 @@
 package com.arkanoid;
 
 import com.arkanoid.entities.Ball;
-import com.arkanoid.entities.Brick;
 import com.arkanoid.entities.Paddle;
-import com.arkanoid.entities.Wall;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 
 
 public class Arkanoid extends ApplicationAdapter {
-
 
 	public static boolean gameOver = false;
 	int rectX = 10;
@@ -21,30 +17,20 @@ public class Arkanoid extends ApplicationAdapter {
 	int rectHeight = 20;
 	Paddle paddle;
 	Ball ball;
-	Wall wallTop;
-	Wall wallLeft;
-	Wall wallRight;
 	float ballPaddleCenterX;
-	Brick brick1;
-	Brick brick2;
-	Brick brick3;
+	MapHandler mapHandler;
 
 
 	@Override
 	public void create () {
-		wallTop = new Wall(0, 590, 800, 10);
-		wallLeft = new Wall(0, 0, 10, 600);
-		wallRight = new Wall(790, 0, 10, 600);
+		mapHandler = new MapHandler();
+		mapHandler.initMap();
 
 		paddle = new Paddle((400 - (rectWidth / 2)), rectY,rectWidth, rectHeight);
 		paddle.setMaxX(Gdx.graphics.getWidth());
 		float ballX = (paddle.getX() + (paddle.getWidth() / 2)) - (10);
 		float ballY = rectY + rectHeight;
 		ball = new Ball(ballX, ballY, 20, 20);
-
-		brick1 = new Brick(10, 300, Color.BLUE);
-		brick2 = new Brick(70, 300, Color.GREEN);
-		brick3 = new Brick(130, 300, Color.CYAN);
 	}
 
 	@Override
@@ -56,15 +42,8 @@ public class Arkanoid extends ApplicationAdapter {
 			handleInput();
 			update();
 
-			brick1.render();
-			brick2.render();
-			brick3.render();
-
+			mapHandler.render();
 			paddle.render();
-			wallTop.render();
-			wallLeft.render();
-			wallRight.render();
-
 			ball.render();
 		}
 	}
@@ -75,6 +54,8 @@ public class Arkanoid extends ApplicationAdapter {
 	public void update() {
 		ballPaddleCenterX = (paddle.getX() + (paddle.getWidth() / 2)) - (ball.width / 2);
 		ball.update(paddle);
+
+		mapHandler.update();
 	}
 
 
