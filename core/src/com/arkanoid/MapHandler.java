@@ -1,5 +1,6 @@
 package com.arkanoid;
 
+import com.arkanoid.entities.Ball;
 import com.arkanoid.entities.Brick;
 import com.arkanoid.entities.Wall;
 import com.badlogic.gdx.graphics.Color;
@@ -60,19 +61,38 @@ public class MapHandler {
      */
     public void render()
     {
-       wallTop.render();
-       wallLeft.render();
-       wallRight.render();
+        wallTop.render();
+        wallLeft.render();
+        wallRight.render();
 
-       drawBricks();
+        drawBricks();
     }
 
     /**
      * Update everything needed for the map
      */
-    public void update()
+    public void update(Ball ball)
     {
+        List<Brick> bricksToDelete = new ArrayList<Brick>();
         //TODO:: add brick collision
+        for (Brick brick: bricks) {
+            //check lower egde
+            if(ball.topPointX > brick.x && ball.topPointX < (brick.x + brick.width)
+                && ball.topPointY >= brick.y ) {
+                ball.velocityY *=  -1;
+                bricksToDelete.add(brick);
+                break;
+            }
+            //check top edge
+            //check left edge
+            //check right edge
+        }
+
+        //delete Bricks
+        for (Brick brick: bricksToDelete) {
+            bricks.remove(brick);
+        }
+        bricksToDelete.clear();
     }
 
     /**

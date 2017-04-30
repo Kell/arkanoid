@@ -18,6 +18,14 @@ public class Ball {
     public float velocityY = 0;
     public int width;
     public int height;
+    public float topPointX;
+    public float topPointY;
+    public float bottomPointX;
+    public float bottomPointY;
+    public float leftPointX;
+    public float leftPointY;
+    public float rightPointX;
+    public float rightPointY;
     ShapeRenderer ballRenderer = null;
 
     public Ball(float x, float y, int w, int h) {
@@ -25,8 +33,53 @@ public class Ball {
         this.y = y;
         width = w;
         height = h;
+        // highest x value of the ball
+        updateTopPointX();
+        updateTopPointY();
+        //lowest x value of the ball
+        updateBottomPointX();
+        //lowest y value of the ball
+        updateBottomPointY();
+        //max x ball value of the right side is in the middle
+        updateRightPointX();
+        updateRightPointY();
+        //max x point to the left of the ball
+        updateLeftPointX();
+        updateLeftPointY();
 
         ballRenderer = new ShapeRenderer();
+    }
+
+    public void updateTopPointX() {
+        this.topPointX = this.x + (width / 2);
+    }
+
+    public void updateTopPointY() {
+        this.topPointY = this.y + height;
+    }
+
+    public void updateBottomPointX() {
+        this.bottomPointX = this.x;
+    }
+
+    public void updateBottomPointY() {
+        this.bottomPointY = this.y;
+    }
+
+    public void updateLeftPointX() {
+        this.leftPointX = this.y + (height / 2);
+    }
+
+    public void updateLeftPointY() {
+        this.leftPointY = this.y;
+    }
+
+    public void updateRightPointX() {
+        this.rightPointX = this.x + width;
+    }
+
+    public void updateRightPointY() {
+        this.rightPointY = this.y + (height / 2);
     }
 
     public void render() {
@@ -47,6 +100,20 @@ public class Ball {
 
         this.x += velocityX * Gdx.graphics.getDeltaTime();
         this.y += velocityY * Gdx.graphics.getDeltaTime();
+
+        // highest x value of the ball
+        updateTopPointX();
+        updateTopPointY();
+        //lowest x value of the ball
+        updateBottomPointX();
+        //lowest y value of the ball
+        updateBottomPointY();
+        //max x ball value of the right side is in the middle
+        updateRightPointX();
+        updateRightPointY();
+        //max x point to the left of the ball
+        updateLeftPointX();
+        updateLeftPointY();
 
     }
 

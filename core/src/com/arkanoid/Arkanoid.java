@@ -54,7 +54,7 @@ public class Arkanoid extends ApplicationAdapter {
 		ballPaddleCenterX = (paddle.getX() + (paddle.getWidth() / 2)) - (ball.width / 2);
 		ball.update(paddle);
 
-		mapHandler.update();
+		mapHandler.update(ball);
 	}
 
 

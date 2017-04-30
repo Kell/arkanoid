@@ -9,10 +9,10 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class Brick {
 
     Color color = Color.WHITE;
-    float x;
-    float y;
-    int width = 60;
-    int height = 20;
+    public float x;
+    public float y;
+    public int width = 60;
+    public int height = 20;
     ShapeRenderer rectRenderer = null;
 
     public Brick(float x, float y, int w, int h) {
