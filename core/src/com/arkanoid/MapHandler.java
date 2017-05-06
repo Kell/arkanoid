@@ -43,7 +43,6 @@ public class MapHandler {
             int rowX = 10;
             rowY += 20;
             for (int j = 1; j <= maxBricksPerRow; j++) {
-                System.out.println("Color:"+currentColorIndex);
                 bricks.add(new Brick(rowX, rowY, currentColorIndex));
                 rowX += 60;
                 currentColorIndex++;
