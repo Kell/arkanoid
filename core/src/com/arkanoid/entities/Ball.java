@@ -3,6 +3,8 @@ package com.arkanoid.entities;
 import com.arkanoid.Arkanoid;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 /**
@@ -11,7 +13,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 public class Ball {
 
     public boolean active = false;
-    public float velocity = 150;
+    public float velocity = 170;
     public float x;
     public float y;
     public float velocityX = 0;
@@ -26,7 +28,8 @@ public class Ball {
     public float leftPointY;
     public float rightPointX;
     public float rightPointY;
-    ShapeRenderer ballRenderer = null;
+    private Texture texture;
+    private SpriteBatch batch;
 
     public Ball(float x, float y, int w, int h) {
         this.x = x;
@@ -47,7 +50,8 @@ public class Ball {
         updateLeftPointX();
         updateLeftPointY();
 
-        ballRenderer = new ShapeRenderer();
+        batch = new SpriteBatch();
+        texture = new Texture(Gdx.files.internal("ball.png"));
     }
 
     public void updateTopPointX() {
@@ -83,18 +87,17 @@ public class Ball {
     }
 
     public void render() {
-        ballRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        ballRenderer.setColor(Color.WHITE);
-        ballRenderer.ellipse(x, y, width, height);
-        ballRenderer.end();
+        batch.begin();
+        batch.draw(texture, this.x, this.y);
+        batch.end();
 
     }
 
     public void update(Paddle paddle) {
 
-        if(this.y >= 570 || this.collisionWithPaddle(paddle)) {
+        if(this.y > 570 || this.collisionWithPaddle(paddle)) {
             velocityY *=  -1;
-        } else if(this.x < 10 || this.x >= 770) {
+        } else if(this.x < 10 || this.x > 770) {
             velocityX *= -1;
         }
 
@@ -118,7 +121,7 @@ public class Ball {
     }
 
     public boolean collisionWithPaddle(Paddle paddle) {
-        if(this.y <= (paddle.getY()+ paddle.getHeight()) ) {
+        if(this.y < (paddle.getY()+ paddle.getHeight()) ) {
            if( this.x < (paddle.getX()+ paddle.getWidth()) && this.x > paddle.getX()) {
                return true;
            } else if(this.y < 0) {

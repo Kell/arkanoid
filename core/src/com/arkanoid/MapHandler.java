@@ -35,9 +35,7 @@ public class MapHandler {
         wallRight = new Wall(790, 0, 10, 600);
 
         // generating bricks
-        //temporary color array
-        Color[] colors = {Color.RED, Color.DARK_GRAY, Color.FOREST, Color.CORAL};
-        int currentColorIndex = 0;
+        int currentColorIndex = 1;
         int rowY = 400;
         // TODO: refactor brick generation for map
         // temporary solution to generate bricks
@@ -45,13 +43,17 @@ public class MapHandler {
             int rowX = 10;
             rowY += 20;
             for (int j = 1; j <= maxBricksPerRow; j++) {
-                bricks.add(new Brick(rowX, rowY, colors[currentColorIndex]));
+                System.out.println("Color:"+currentColorIndex);
+                bricks.add(new Brick(rowX, rowY, currentColorIndex));
                 rowX += 60;
                 currentColorIndex++;
+
                 //start again with colors
-                if(currentColorIndex == colors.length) {
-                    currentColorIndex = 0;
+                if(currentColorIndex == 4) {
+                    currentColorIndex = 1;
                 }
+
+
             }
         }
     }
@@ -84,8 +86,26 @@ public class MapHandler {
                 break;
             }
             //check top edge
+            //if(ball.topPointX > brick.x && ball.topPointX < (brick.x + brick.width)
+            //        && ball.topPointY <= (brick.y + brick.height) ) {
+            //    ball.velocityY *=  -1;
+            //    bricksToDelete.add(brick);
+            //    break;
+            //}
             //check left edge
+            //if(ball.rightPointY > brick.y && ball.rightPointY < (brick.y + brick.height)
+            //        && ball.rightPointX <= brick.x) {
+            //    ball.velocityX *=  -1;
+            //    bricksToDelete.add(brick);
+            //    break;
+            //}
             //check right edge
+            //if(ball.leftPointY > brick.y && ball.leftPointY < (brick.y + brick.height)
+            //        && ball.leftPointX <= (brick.x) + brick.width) {
+            //    ball.velocityX *=  -1;
+            //    bricksToDelete.add(brick);
+            //    break;
+            //}
         }
 
         //delete Bricks
